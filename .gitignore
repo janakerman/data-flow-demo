@@ -1,0 +1,6 @@
+mylocal/
+build/
+.idea/
+.gradle/
+out/
+*.iml

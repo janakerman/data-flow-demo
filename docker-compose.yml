@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    expose:
+      - "15672"
+      - "5672"
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: scdf
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: dataflow
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+  redis:
+    image: redis:2.8
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+# dataflow-server:
+#   image: springcloud/spring-cloud-dataflow-server-local:1.5.0.M1
+#   container_name: dataflow-server
+#   ports:
+#     - "9393:9393"
+#   environment:
+#     - spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.brokers=kafka:9092
+#     - spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.zkNodes=zookeeper:2181
+#     - spring_datasource_url=jdbc:mysql://mysql:3306/dataflow
+#     - spring_datasource_username=root
+#     - spring_datasource_password=rootpw
+#     - spring_datasource_driver-class-name=org.mariadb.jdbc.Driver
+#     - spring.cloud.dataflow.applicationProperties.stream.spring.redis.host=redis
+#     - spring_redis_host=redis
+#   depends_on:
+#     - rabbitmq
+#     - mysql
+#     - redis
